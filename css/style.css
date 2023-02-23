@@ -1,0 +1,131 @@
+/************************************************************************
+                                GENERALITÉE
+************************************************************************/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+body {
+  font-size: 1.8rem;
+  font-family: sans-serif;
+}
+main {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+img {
+  width: 100%;
+}
+ul {
+  padding: 0;
+  list-style: none;
+}
+a {
+  display: block;
+  text-decoration: none;
+}
+/************************************************************************
+                                HEADER
+************************************************************************/
+header {
+  background-image: url(../assets/header.jpg);
+  background-position: center;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 50px;
+  height: 300px;
+}
+header p:first-child {
+  font-size: 4em;
+  text-transform: uppercase;
+}
+/************************************************************************
+                                NAV
+************************************************************************/
+nav,
+ul,
+li {
+  display: flex;
+}
+nav ul {
+  margin-left: 300px;
+}
+nav li {
+  margin: 0 20px;
+}
+nav a {
+  display: block;
+  color: white;
+}
+/************************************************************************
+                                MAIN
+************************************************************************/
+
+/*TITLE*/
+main h1 {
+  text-align: center;
+  font-size: 2.7em;
+}
+main h2 {
+  margin-top: 100px;
+}
+main ul {
+  gap: 10px;
+}
+/************************************************************************
+                                PRODUCT CARDS
+************************************************************************/
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 50px auto;
+  width: 85%;
+  row-gap: 20px;
+}
+.card {
+  width: 300px;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 3%;
+  box-shadow: 0 0 5px black;
+}
+.card h2 {
+  margin: auto;
+}
+.card p {
+  margin: 10px;
+}
+.card .price {
+  font-size: 1.8em;
+  color: lightskyblue;
+}
+.card button {
+  box-shadow: none;
+  padding: 10px;
+  font-size: 1em;
+  background-color: yellowgreen;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+/************************************************************************
+                                FOOTER
+************************************************************************/
+footer {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.2);
+}
