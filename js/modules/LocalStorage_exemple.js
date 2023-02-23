@@ -1,5 +1,10 @@
 
 class LocalStorage {
+
+    constructor(key) {
+        this.key = key
+    }
+
     getFormData() {
         let formData;
         if (localStorage.getItem("formData") === null) {

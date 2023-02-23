@@ -1,34 +1,25 @@
-import { DisplayCart } from "./DisplayCart.js";
-
 class LocalStorage {
-     cartData = []
-     template = new DisplayCart
 
+    constructor(key, product) {
+        this.key = key
+        this.product = product
+    }
 
-     getCartData() {
-        
-        if (localStorage.getItem("cartData") === null) {
-            this.template.emptyCart();
+    getCartData() {
+        let cartData
+
+        if (JSON.parse(localStorage.getItem(this.key)) === null) {
+            cartData = []
         } else {
-            this.cartData = JSON.parse(localStorage.getItem("cartData"));
-
-            this.template.displayLS(this.cartData[0].img, this.cartData[0].name, this.cartData[0].price)
+            cartData = JSON.parse(localStorage.getItem(this.key))
         }
-
+        return cartData
     }
 
     addCartData(data) {
-        this.cartData = this.getCartData();
-        if (!Array.isArray(cartData)) {
-            this.cartData = [];
-        }
-        this.cartData.push(data);
-        localStorage.setItem("cartData", JSON.stringify(this.cartData));
-    }
-    
-
-    clearItemCartData(data){
-        localStorage.removeItem(data);
+        let cartData = this.getCartData();
+        cartData.push(data);
+        localStorage.setItem(this.key, JSON.stringify(cartData));
     }
 
     clearAllCartData() {
@@ -36,4 +27,4 @@ class LocalStorage {
     }
 }
 
-export {LocalStorage} ;
+export default LocalStorage;
