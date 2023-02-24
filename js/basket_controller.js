@@ -10,11 +10,16 @@ if (!basket) {
   $basketContainer.innerHTML = '<h2>Le panier est vide</h2>'
 } else {
   for (let element in basket) {
-    $basketContainer.innerHTML = `
-                                <ul>
-                                    <li><img src=".${basket[element].img}"><p> ${basket[element].title} ${basket[element].price}€ TTC </p><button data-product='${basket[element].id}' class='supp'>Supprimer</button></li>
-                                </ul>
-                                `
+    $basketContainer.insertAdjacentHTML("afterbegin", `
+    <ul>
+        <li>
+        <img src=".${basket[element].img}">
+        <p>${basket[element].quantity}  -  ${basket[element].title} ${basket[element].price}€ TTC </p>
+        <button data-product='${basket[element].id}' class='supp'>Supprimer</button>
+        <button data-product='${basket[element].id}' class='
+        </li>
+    </ul>
+    `)
   };
 }
 const $supp = document.querySelectorAll('supp');
@@ -25,7 +30,8 @@ $supp.forEach((item, index) => {
     if (products[index].id === Number(item.getAttribute("data-product"))) {
       console.log(products[index])
       const basket = new Basket()
-      basket.remove(products[index])
+      if (products[index].quantity < 1)
+        basket.remove(products[index])
     }
   });
 });
