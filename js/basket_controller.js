@@ -1,37 +1,42 @@
 import Basket from "./modules/Basket.js"
-import products from "./products/myProduct.js"
 
 
 //Affichage du panier en recuprant les données du LocalStorage
 const $basketContainer = document.querySelector('.basket-container')
 const basket = JSON.parse(localStorage.getItem('basket'))
 
-if (!basket) {
+
+if (basket.length === 0) {
   $basketContainer.innerHTML = '<h2>Le panier est vide</h2>'
 } else {
   for (let element in basket) {
-    $basketContainer.insertAdjacentHTML("afterbegin", `
-    <ul>
-        <li>
-        <img src=".${basket[element].img}">
-        <p>${basket[element].quantity}  -  ${basket[element].title} ${basket[element].price}€ TTC </p>
-        <button data-product='${basket[element].id}' class='supp'>Supprimer</button>
-        <button data-product='${basket[element].id}' class='
-        </li>
-    </ul>
-    `)
-  };
-}
-const $supp = document.querySelectorAll('supp');
-console.log($supp)
-$supp.forEach((item, index) => {
-  item.addEventListener("click", () => {
-    console.log('click')
-    if (products[index].id === Number(item.getAttribute("data-product"))) {
-      console.log(products[index])
+    const $list = document.createElement('ul')
+    $basketContainer.appendChild($list)
+    const $item = document.createElement('li');
+    $list.appendChild($item);
+    const $img = document.createElement('img')
+    $img.src = '.' + basket[element].img
+    $item.appendChild($img)
+    const $title = document.createElement('p')
+    $title.innerHTML = `${basket[element].quantity}  -  ${basket[element].title} ${basket[element].price}€ TTC`
+    $item.appendChild($title)
+    const $suppBtn = document.createElement('button')
+    $suppBtn.setAttribute('class', 'supp')
+    $suppBtn.setAttribute('data-id', `${basket[element].id}`)
+    $suppBtn.innerHTML = 'Supprimer'
+    $item.appendChild($suppBtn)
+  }
+
+  const $supp = document.querySelectorAll('.supp')
+  $supp.forEach((item) => {
+    item.addEventListener("click", () => {
+
+
       const basket = new Basket()
-      if (products[index].quantity < 1)
-        basket.remove(products[index])
-    }
+      console.log(item.getAttribute('data-id'))
+      basket.remove(Number(item.getAttribute('data-id')))
+      location.reload()
+
+    });
   });
-});
+}

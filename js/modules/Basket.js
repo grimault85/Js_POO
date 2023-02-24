@@ -1,6 +1,7 @@
 class Basket {
   constructor() {
-    let basket = localStorage.getItem('basket')
+
+    const basket = localStorage.getItem('basket')
     if (basket == null) {
       this.basket = []
     } else {
@@ -12,6 +13,7 @@ class Basket {
   save() {
     localStorage.setItem("basket", JSON.stringify(this.basket));
   }
+
   add(product) {
     let foundProduct = this.basket.find(p => p.id == product.id)
     if (foundProduct != undefined) {
@@ -22,37 +24,11 @@ class Basket {
     }
     this.save()
   }
-  remove(product) {
-    this.basket = basket.filter(p => p.id != product.id)
+
+  remove(id) {
+    this.basket = this.basket.filter(p => p.id != id)
     this.save()
   }
-  changeQuantity(product, quantity) {
-    let foundProduct = this.basket.find(p => p.id == product.id)
-    if (foundProduct != undefined) {
-      foundProduct.quantity += quantity
-      if (foundProduct.quantity <= 0) {
-        remove(foundProduct)
-      } else {
-
-        this.save(basket)
-      }
-    }
-  }
-  getNumberProduct() {
-    let number = 0
-    for (let product of this.basket) {
-      number += product.quantity
-    }
-    return number
-  }
-  getTotalPrice() {
-    let total = 0
-    for (let product of this.basket) {
-      total += product.price
-    }
-    return total
-  }
-
 }
 
 export default Basket
