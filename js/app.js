@@ -1,23 +1,24 @@
 
-import LocalStorage from "./modules/LocalStorage.js";
+import Basket from "./modules/Basket.js";
 import Product from "./modules/Product.js";
 import products from "./products/myProduct.js";
 
+//Affichage des produits
 const $target = document.querySelector('.cards');
-const $addCart = document.querySelectorAll('button');
-
-
 products.forEach(el => {
-    const product = new Product(el.id, el.title, el.img, el.price)
-    $target.insertAdjacentHTML('beforeend', product.displayCard())
+  const product = new Product(el.id, el.title, el.img, el.price)
+  $target.insertAdjacentHTML('beforeend', product.displayCard())
 })
 
+//Enregistrement des produit selectionner dans le LocalStorage
+const $addCart = document.querySelectorAll('button');
 $addCart.forEach((item, index) => {
-    item.addEventListener("click", () => {
-        if (products[index].id === Number(item.getAttribute("data-product"))) {
-            const ls = new LocalStorage('myCart:', products[index])
-            ls.addCartData(products[index])
-        }
-    });
+  item.addEventListener("click", () => {
+    if (products[index].id === Number(item.getAttribute("data-product"))) {
+      const basket = new Basket()
+      console.log(basket)
+      basket.add(products[index])
+    }
+  });
 });
 
