@@ -1,34 +1,50 @@
+import LocalStorageManager from "./LocalStorage.js"
+
 class Basket {
-  constructor() {
-
-    const basket = localStorage.getItem('basket')
-    if (basket == null) {
-      this.basket = []
-    } else {
-      this.basket = JSON.parse(basket)
-    }
-
+  constructor(product) {
+    this.ls = new LocalStorageManager('Basket', product)
   }
 
-  save() {
-    localStorage.setItem("basket", JSON.stringify(this.basket));
+  getProduct() {
+    this.ls.getData()
   }
 
-  add(product) {
-    let foundProduct = this.basket.find(p => p.id == product.id)
+  addProduct() {
+    this.ls.addData(this.product)
+  }
+
+  removeproduct() {
+    this.le.remove(this.product.id)
+  }
+
+  setQuantity(quantity) {
+    let foundProduct = this.basket.find(p => p.id == this.product.id)
+    this.product.quantity = 0
     if (foundProduct != undefined) {
-      foundProduct.quantity++
-    } else {
-      product.quantity = 1
-      this.basket.push(product)
+      foundProduct.quantity += quantity
+      if (foundProduct.quantity <= 0) {
+        ls.remove(product.id)
+      } else {
+        ls.save()
+      }
     }
-    this.save()
   }
 
-  remove(id) {
-    this.basket = this.basket.filter(p => p.id != id)
-    this.save()
+  getQuantity() {
+    let number = 0
+    for (let product of this.product) {
+      number += product.quantity
+    }
+    return number
   }
+
+  getTotalPrice() {
+    let total = 0
+    for (let product of product) {
+      total += product.price
+    }
+    return total
+  }
+  //fonction refresh
 }
-
 export default Basket

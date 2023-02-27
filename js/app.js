@@ -15,9 +15,9 @@ const $addCart = document.querySelectorAll('button');
 $addCart.forEach((item, index) => {
   item.addEventListener("click", () => {
     if (products[index].id === Number(item.getAttribute("data-product"))) {
-      const basket = new Basket()
-      console.log(basket)
-      basket.add(products[index])
+      const basket = new Basket(products[index])
+      console.log(products[index])
+
     }
   });
 });
